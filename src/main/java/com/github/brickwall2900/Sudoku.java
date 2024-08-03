@@ -118,6 +118,7 @@ public class Sudoku extends JFrame {
         Generator generator = new Generator();
         grid = generator.generate(level.cellsEmpty);
         int size = grid.getSize();
+        lockedCells.clear();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 Grid.Cell cell = grid.getCell(i,j);
@@ -175,6 +176,7 @@ public class Sudoku extends JFrame {
         if (selectedCell == null) return;
         Container parent = selectedCell.getParent();
 
+        boolean hasCell = false;
         for (JLabel[] row : cellLabels) {
             for (JLabel cell : row) {
                 Container parent2 = cell.getParent();
@@ -183,8 +185,11 @@ public class Sudoku extends JFrame {
                 if (!text.isEmpty() && text.equals(selectedCell.getText())) {
                     parent2.setBackground(Color.PINK);
                 }
+                hasCell |= selectedCell.equals(cell);
             }
         }
+
+        if (!hasCell) return;
 
         if (!lockedCells.contains(selectedCell)) {
             parent.setBackground(Color.CYAN.brighter());
