@@ -208,10 +208,10 @@ public class Sudoku extends JFrame {
                         putValue(selectedCell, 0);
                     } else if (keyCode == VK_ENTER) {
                         if (validateBoard()) {
+                            completed = true;
                             statusBar.setText("Completed!");
                             statusBar.setForeground(Color.GREEN);
                             JOptionPane.showMessageDialog(this, "You did it!! Press 'End' for a new game.", NAME, JOptionPane.INFORMATION_MESSAGE);
-                            completed = true;
                         } else {
                             statusBar.setText("Failed!");
                             statusBar.setForeground(Color.RED);
@@ -225,6 +225,7 @@ public class Sudoku extends JFrame {
                             null, Level.values(), Level.BABY);
                     if (answer != JOptionPane.CLOSED_OPTION) {
                         initBoard(Level.values()[answer]);
+                        statusBar.setText("Solve the game!");
                     }
                     hooksEnabled = true;
                 }
